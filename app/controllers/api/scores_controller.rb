@@ -15,6 +15,18 @@ module Api
       render json: response.to_json
     end
 
+    def index
+      user = User.includes(:scores).find_by(id: params[:golfer_id])
+
+      if user
+        render json: {
+          scores: user.scores.order(played_at: :desc).as_json(only: [:id, :total_score, :played_at])
+        }
+      else
+        render json: { error: 'Golfer not found' }, status: :not_found
+      end
+    end
+
     def create
       score = current_user.scores.build(score_params)
 
