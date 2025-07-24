@@ -4,7 +4,7 @@
 class Score < ApplicationRecord
   belongs_to :user
 
-  validates :number_of_holes, inclusion: {in: [9, 18]}
+  validates :number_of_holes, inclusion: { in: [9, 18] }
   validate :future_score
   validate :score_values
 
@@ -28,10 +28,23 @@ class Score < ApplicationRecord
   def score_values
     return if total_score.blank? || number_of_holes.blank?
 
-    if number_of_holes == 9 && !total_score.between?(27, 89)
-      errors.add(:total_score, 'must be between 27 and 89 for a 9-hole course')
-    elsif number_of_holes == 18 && !total_score.between?(54, 179)
-      errors.add(:total_score, 'must be between 54 and 179 for an 18-hole course')
+    case number_of_holes
+    when 9
+      validate_9_hole_score
+    when 18
+      validate_18_hole_score
     end
+  end
+
+  def validate_9_hole_score
+    return if total_score.between?(27, 89)
+
+    errors.add(:total_score, 'must be between 27 and 89 for a 9-hole course')
+  end
+
+  def validate_18_hole_score
+    return if total_score.between?(54, 179)
+
+    errors.add(:total_score, 'must be between 54 and 179 for an 18-hole course')
   end
 end

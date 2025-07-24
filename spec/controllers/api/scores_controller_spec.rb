@@ -32,7 +32,8 @@ describe Api::ScoresController, type: :request do
     it 'should save and return the new score if valid parameters' do
       score_count = Score.count
 
-      post api_scores_path, params: { score: { total_score: 79, played_at: '2021-06-29', number_of_holes: 18 }}
+      post api_scores_path,
+           params: { score: { total_score: 79, played_at: '2021-06-29', number_of_holes: 18 }}
 
       expect(response).to have_http_status(:ok)
       expect(Score.count).to eq score_count + 1
@@ -84,7 +85,6 @@ describe Api::ScoresController, type: :request do
       response_hash = JSON.parse(response.body)
       expect(response_hash['errors']['number_of_holes']).to include('is not included in the list')
     end
-
   end
 
   describe 'DELETE destroy' do
