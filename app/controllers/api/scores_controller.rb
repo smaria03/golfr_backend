@@ -40,7 +40,7 @@ module Api
     private
 
     def score_params
-      params.require(:score).permit(:total_score, :played_at)
+      params.require(:score).permit(:total_score, :played_at, :number_of_holes)
     end
 
     def validate_score_user_id
