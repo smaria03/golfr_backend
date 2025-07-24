@@ -9,6 +9,6 @@ Rails.application.routes.draw do
       resources :scores, only: [:index]
     end
 
-    resources :scores, only: %i[create destroy]
+    resources :scores, only: %i[index create destroy]
   end
 end
