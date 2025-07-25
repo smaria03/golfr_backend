@@ -68,6 +68,66 @@ describe Api::ScoresController, type: :request do
       expect(Score.count).to eq score_count
     end
 
+    it 'should return a validation error if score is too low for 9 holes' do
+      score_count = Score.count
+
+      post api_scores_path, params: {
+        score: {
+          total_score: 20,
+          played_at: '2021-06-29',
+          number_of_holes: 9
+        }
+      }
+
+      expect(response).not_to have_http_status(:ok)
+      expect(Score.count).to eq score_count
+    end
+
+    it 'should return a validation error if score is too high for 9 holes' do
+      score_count = Score.count
+
+      post api_scores_path, params: {
+        score: {
+          total_score: 100,
+          played_at: '2021-06-29',
+          number_of_holes: 9
+        }
+      }
+
+      expect(response).not_to have_http_status(:ok)
+      expect(Score.count).to eq score_count
+    end
+
+    it 'should return a validation error if score is too low for 18 holes' do
+      score_count = Score.count
+
+      post api_scores_path, params: {
+        score: {
+          total_score: 40,
+          played_at: '2021-06-29',
+          number_of_holes: 18
+        }
+      }
+
+      expect(response).not_to have_http_status(:ok)
+      expect(Score.count).to eq score_count
+    end
+
+    it 'should return a validation error if score is too high for 18 holes' do
+      score_count = Score.count
+
+      post api_scores_path, params: {
+        score: {
+          total_score: 200,
+          played_at: '2021-06-29',
+          number_of_holes: 18
+        }
+      }
+
+      expect(response).not_to have_http_status(:ok)
+      expect(Score.count).to eq score_count
+    end
+
     it 'should return a validation error if number_of_holes is not 9 or 18' do
       score_count = Score.count
 
