@@ -26,6 +26,20 @@ describe Api::ScoresController, type: :request do
       expect(scores[1]['total_score']).to eq 68
       expect(scores[2]['total_score']).to eq 79
     end
+
+    it 'should allow only 25 scores to appear' do
+      30.times do
+        create(:score, user: @user1, total_score: 80, played_at: '2021-06-20')
+      end
+
+      get api_feed_path
+
+      expect(response).to have_http_status(:ok)
+      response_hash = JSON.parse(response.body)
+      scores = response_hash['scores']
+
+      expect(scores.size).to eq 25
+    end
   end
 
   describe 'POST create' do
