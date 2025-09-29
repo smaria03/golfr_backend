@@ -21,7 +21,8 @@ module Api
 
         if user
           render json: {
-            scores: user.scores.order(played_at: :desc).as_json(only: [:id, :total_score, :played_at])
+            scores: user.scores.order(played_at: :desc).as_json(only: %i[id total_score
+                                                                         played_at])
           }
         else
           render json: { error: 'Golfer not found' }, status: :not_found
@@ -29,7 +30,7 @@ module Api
       else
         scores = Score.order(played_at: :desc)
         render json: {
-          scores: scores.as_json(only: [:id, :total_score, :played_at, :user_id])
+          scores: scores.as_json(only: %i[id total_score played_at user_id])
         }
       end
     end
