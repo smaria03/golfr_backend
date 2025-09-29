@@ -50,3 +50,5 @@ gem 'devise-jwt'
 gem 'rubocop', '1.27.0'
 gem 'rubocop-rails', '2.14.2'
 gem 'rubocop-gitlab-security', '0.1.1'
+gem 'unicode-display_width', '< 3.0'
+
