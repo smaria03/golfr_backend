@@ -16,10 +16,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0.1'
-      - name: Setup pronto
-        run: gem install 'pronto:0.11.0' 'rubocop:1.27.0' 'pronto-rubocop:0.11.1' 'rubocop-rails:2.14.2' 'rubocop-gitlab-security:0.1.1' pronto-brakeman pronto-fasterer pronto-flay --conservative
+      - name: Install Ruby gems
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
       - name: Run Pronto
-        run: pronto run -f github_status github_pr -c origin/${{ github.base_ref }}
+        run: bundle exec pronto run -f github_status github_pr -c origin/${{ github.base_ref }}
         env:
           PRONTO_PULL_REQUEST_ID: ${{ github.event.pull_request.number }}
           PRONTO_GITHUB_ACCESS_TOKEN: ${{ github.token }}
