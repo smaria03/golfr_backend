@@ -27,6 +27,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'rubocop', '1.27.0'
+  gem 'rubocop-rails', '2.14.2'
 end
 
 group :development do
@@ -45,8 +47,3 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # User management
 gem 'devise'
 gem 'devise-jwt'
-
-# Static code analysis
-gem 'rubocop', '1.27.0'
-gem 'rubocop-rails', '2.14.2'
-gem 'rubocop-gitlab-security', '0.1.1'
