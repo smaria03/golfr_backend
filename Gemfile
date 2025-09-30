@@ -27,16 +27,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-  gem 'pronto'
-  gem 'pronto-rubocop', '0.11.1'
-  gem 'pronto-flay'
-  gem 'pronto-fasterer'
-  gem 'pronto-brakeman'
   gem 'rubocop', '1.27.0'
   gem 'rubocop-rails', '2.14.2'
-  gem 'rubocop-gitlab-security', '0.1.1'
-  gem 'unicode-display_width', '< 3.0'
-  gem 'faraday-retry'
 end
 
 group :development do
