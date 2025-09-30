@@ -55,10 +55,3 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # User management
 gem 'devise'
 gem 'devise-jwt'
-
-# Static code analysis
-gem 'rubocop', '1.27.0'
-gem 'rubocop-rails', '2.14.2'
-gem 'rubocop-gitlab-security', '0.1.1'
-gem 'unicode-display_width', '< 3.0'
-
